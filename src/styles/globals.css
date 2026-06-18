@@ -1,0 +1,49 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@theme {
+  /* Master Plan Color System */
+  --color-nurvera-olive: #556B2F;
+  --color-nurvera-forest: #3E5A38;
+  --color-nurvera-sage: #9BAE8A;
+  --color-nurvera-bg: #F8F7F3;
+  --color-nurvera-cream: #F2EEE5;
+  --color-nurvera-earth: #8B6B4A;
+  --color-nurvera-text: #2C2C2C;
+  --color-nurvera-footer: #2D3E2E;
+
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Playfair Display", serif;
+  
+  --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.05);
+  --shadow-elegant: 0 20px 40px -15px rgba(85, 107, 47, 0.15);
+  --shadow-header: 0 4px 30px rgba(0,0,0,0.04);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-nurvera-bg text-nurvera-text font-sans antialiased selection:bg-nurvera-olive selection:text-white;
+  line-height: 1.7;
+}
+
+/* Preloader Animations */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOutLate {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.animate-fade-out-late {
+  animation: fadeOutLate 1.2s ease-in-out forwards;
+}
