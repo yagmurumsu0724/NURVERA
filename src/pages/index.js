@@ -4,6 +4,7 @@ import StorySection from "@/components/sections/StorySection";
 import FeaturedProducts from "@/components/sections/FeaturedProducts";
 import ProcessSection from "@/components/sections/ProcessSection";
 import WhyNurvera from "@/components/sections/WhyNurvera";
+import ServicesSection from "@/components/sections/ServicesSection";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
         <FeaturedProducts />
         <ProcessSection />
         <WhyNurvera />
+        <ServicesSection />
       </div>
     </>
   );

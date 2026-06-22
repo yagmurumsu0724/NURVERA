@@ -9,6 +9,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileGuideOpen, setMobileGuideOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { getTotalItems, toggleCart } = useCartStore();
   const router = useRouter();
@@ -27,6 +28,7 @@ export default function Header() {
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
     setMobileGuideOpen(false);
+    setMobileServicesOpen(false);
   };
 
   const isSolid = !isHomePage || scrolled;
@@ -52,6 +54,12 @@ export default function Header() {
     { title: 'Destek ve İletişim', path: '/iletisim' }
   ];
 
+  const serviceLinks = [
+    { title: 'Hacamat Uygulamaları', path: '/hacamat' },
+    { title: 'Sülük Uygulamaları', path: '/suluk' },
+    { title: 'Randevu Al', path: '/randevu' }
+  ];
+
   return (
     <header className={`fixed top-0 w-full z-50 transition-all duration-500 h-[88px] flex items-center ${headerClasses}`}>
       <div className="container mx-auto px-6 flex justify-between items-center w-full">
@@ -68,6 +76,23 @@ export default function Header() {
         <nav className="hidden lg:flex space-x-10 items-center">
           <Link href="/" className={`text-[15px] font-medium transition-colors duration-300 tracking-wide ${linkColor}`}>Ana Sayfa</Link>
           <Link href="/urunler" className={`text-[15px] font-medium transition-colors duration-300 tracking-wide ${linkColor}`}>Koleksiyon</Link>
+          
+          {/* Services Dropdown */}
+          <div className="relative group h-[88px] flex items-center">
+            <button className={`flex items-center text-[15px] font-medium transition-colors duration-300 tracking-wide ${linkColor}`}>
+              Geleneksel Uygulamalar
+              <ChevronDown size={14} className="ml-1 opacity-70 group-hover:rotate-180 transition-transform duration-300" />
+            </button>
+            <div className="absolute top-[88px] left-1/2 -translate-x-1/2 w-[280px] bg-white opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-[0_20px_40px_rgba(0,0,0,0.08)] border border-gray-100 rounded-b-2xl overflow-hidden cursor-default flex flex-col py-4">
+              {serviceLinks.map((link, idx) => (
+                <Link key={idx} href={link.path} className="px-8 py-3 text-sm text-nurvera-text/80 hover:text-nurvera-olive hover:bg-nurvera-bg transition-all font-medium flex items-center group/link">
+                  <span className="w-1.5 h-1.5 rounded-full bg-nurvera-olive/30 mr-3 group-hover/link:bg-nurvera-olive transition-colors"></span>
+                  {link.title}
+                </Link>
+              ))}
+            </div>
+          </div>
+
           <Link href="/hakkimizda" className={`text-[15px] font-medium transition-colors duration-300 tracking-wide ${linkColor}`}>Hikayemiz</Link>
           
           {/* Mega Menu Trigger */}
@@ -126,10 +151,31 @@ export default function Header() {
         <div className="flex flex-col px-8 py-8 space-y-5">
           <Link href="/" onClick={closeMobileMenu} className="text-xl font-serif text-nurvera-text">Ana Sayfa</Link>
           <Link href="/urunler" onClick={closeMobileMenu} className="text-xl font-serif text-nurvera-text">Koleksiyon</Link>
+          
+          {/* Mobil Akordeon - Services */}
+          <div className="border-y border-gray-100 py-2 my-2">
+            <button 
+              className="w-full flex items-center justify-between text-xl font-serif text-nurvera-text focus:outline-none"
+              onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+            >
+              Geleneksel Uygulamalar
+              <ChevronDown size={20} className={`text-nurvera-olive transition-transform duration-300 ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+            </button>
+            <div className={`overflow-hidden transition-all duration-300 ease-in-out ${mobileServicesOpen ? 'max-h-[300px] mt-4 opacity-100' : 'max-h-0 opacity-0'}`}>
+              <div className="flex flex-col space-y-3 pl-4 border-l border-nurvera-olive/20 pb-2">
+                {serviceLinks.map((link, idx) => (
+                  <Link key={idx} href={link.path} onClick={closeMobileMenu} className="text-sm font-medium text-nurvera-text/70">
+                    {link.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
           <Link href="/hakkimizda" onClick={closeMobileMenu} className="text-xl font-serif text-nurvera-text">Hikayemiz</Link>
           
-          {/* Mobil Akordeon */}
-          <div className="border-y border-gray-100 py-2 my-2">
+          {/* Mobil Akordeon - Guide */}
+          <div className="border-b border-gray-100 pb-2 mb-2">
             <button 
               className="w-full flex items-center justify-between text-xl font-serif text-nurvera-text focus:outline-none"
               onClick={() => setMobileGuideOpen(!mobileGuideOpen)}

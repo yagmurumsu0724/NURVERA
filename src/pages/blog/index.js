@@ -8,7 +8,7 @@ import { blogPosts } from '@/data/blog';
 export default function BlogIndex() {
   const [activeCategory, setActiveCategory] = useState('Tümü');
 
-  const categories = ['Tümü', 'Hidrosol Rehberi', 'Doğal Yaşam', 'Cilt Bakımı', 'İçerik Analizi'];
+  const categories = ['Tümü', 'Geleneksel Uygulamalar', 'Hidrosol Rehberi', 'Doğal Yaşam', 'Cilt Bakımı', 'İçerik Analizi'];
 
   const filteredPosts = activeCategory === 'Tümü' 
     ? blogPosts 
