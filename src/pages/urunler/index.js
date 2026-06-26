@@ -1,141 +1,138 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { ShoppingBag, Filter, ChevronRight, Star } from 'lucide-react';
 import { products } from '@/data/products';
 import useCartStore from '@/store/cartStore';
 
-export default function ProductsPage() {
-  const [activeCategory, setActiveCategory] = useState('Tümü');
-  const { addItem, toggleCart } = useCartStore();
+export default function UrunlerPage() {
+  const [filter, setFilter] = useState('Tümü');
+  const { addItem } = useCartStore();
 
-  const handleAddToCart = (product, e) => {
-    e.preventDefault();
-    addItem(product);
-    toggleCart();
+  const categories = ['Tümü', 'Yağlar', 'Kremler'];
+
+  const filteredProducts = filter === 'Tümü' 
+    ? products 
+    : products.filter(p => p.category === filter);
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
   };
 
-  const categories = ['Tümü', 'Hidrosol', 'Sirke', 'Yağ'];
-
-  const filteredProducts = activeCategory === 'Tümü'
-    ? products
-    : products.filter(p => {
-        // Simple mock filtering logic based on name since we don't have explicit category in data
-        if (activeCategory === 'Hidrosol') return p.name.includes('Hidrosol');
-        if (activeCategory === 'Sirke') return p.name.includes('Sirke');
-        if (activeCategory === 'Yağ') return p.name.includes('Yağı') || p.name.includes('Tentür');
-        return true;
-      });
+  const handleAddToCart = (e, product) => {
+    e.preventDefault();
+    addItem(product, 1);
+    // Bildirim veya animasyon eklenebilir
+  };
 
   return (
     <>
       <Head>
-        <title>Koleksiyon | NURVERA</title>
+        <title>NURVERA Koleksiyon | Geleneksel Doğal Bakım Ürünleri</title>
+        <meta name="description" content="NURVERA'nın %100 doğal, bitkisel yağlar ve kremlerden oluşan şifa koleksiyonunu keşfedin." />
       </Head>
 
-      <div className="bg-[#Fdfbf7] min-h-screen pt-32 pb-24">
-        
-        {/* Sayfa Başlığı (Hero) */}
-        <div className="container mx-auto px-6 mb-16">
-          <motion.div 
-            className="text-center max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <span className="text-nurvera-accent tracking-[0.2em] uppercase text-xs font-bold mb-4 block">Koleksiyon</span>
-            <h1 className="font-serif text-5xl md:text-6xl font-normal text-nurvera-text mb-6">Doğanın Saf Özleri</h1>
-            <p className="text-lg text-nurvera-text/70 font-light leading-relaxed">
-              Katkı maddesi içermeyen, tamamen doğal ve geleneksel yöntemlerle üretilen koleksiyonumuzla tanışın.
+      {/* Hero Section */}
+      <section className="relative pt-40 pb-20 bg-nurvera-bg overflow-hidden border-b border-black/5">
+        <div className="absolute top-0 right-0 w-[40%] h-[100%] bg-nurvera-olive/10 blur-[100px] rounded-bl-full pointer-events-none"></div>
+        <div className="container mx-auto px-6 relative z-10 text-center">
+          <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
+            <span className="text-[#c5a028] tracking-[0.3em] text-xs font-bold uppercase mb-4 block">NURVERA KOLEKSİYON</span>
+            <h1 className="text-4xl md:text-6xl font-serif text-nurvera-text mb-6">Doğanın En Saf Hali</h1>
+            <p className="text-lg text-nurvera-text/70 max-w-2xl mx-auto font-light leading-relaxed">
+              Katkı maddesi, sentetik parfüm ve petrol türevleri içermeyen; tamamen geleneksel yöntemlerle elde edilmiş doğal yağlar ve onarıcı kremler.
             </p>
           </motion.div>
         </div>
+      </section>
 
-        {/* Kategoriler */}
-        <div className="container mx-auto px-6 mb-12">
-          <motion.div 
-            className="flex flex-wrap justify-center gap-3"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          >
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-500 ${
-                  activeCategory === category 
-                    ? 'bg-nurvera-olive text-white shadow-md' 
-                    : 'bg-white text-gray-400 hover:text-nurvera-olive border border-gray-200 hover:border-nurvera-olive'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Ürün Listesi */}
-        <div className="container mx-auto px-6">
-          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            <AnimatePresence>
-              {filteredProducts.map((product, index) => (
-                <motion.div 
-                  key={product.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group bg-white overflow-hidden hover:shadow-elegant transition-all duration-700 border border-gray-100 flex flex-col"
+      {/* Ürün Listesi */}
+      <section className="py-16 bg-white min-h-screen">
+        <div className="container mx-auto px-6 max-w-7xl">
+          
+          {/* Filtreler */}
+          <div className="flex flex-col md:flex-row justify-between items-center mb-12">
+            <div className="flex items-center space-x-2 mb-4 md:mb-0">
+              <Filter size={18} className="text-nurvera-text/50" />
+              <span className="text-nurvera-text/70 text-sm font-medium uppercase tracking-wider">Filtrele:</span>
+            </div>
+            <div className="flex space-x-4">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setFilter(cat)}
+                  className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                    filter === cat 
+                      ? 'bg-nurvera-forest text-white shadow-md' 
+                      : 'bg-nurvera-bg text-nurvera-text/70 hover:bg-nurvera-olive/10 hover:text-nurvera-text'
+                  }`}
                 >
-                  {/* Görsel Alanı */}
-                  <Link href={`/urunler/${product.id}`} className="block relative h-[360px] overflow-hidden bg-[#f9f8f6] cursor-pointer">
-                    {product.badge && (
-                      <div className="absolute top-6 left-6 z-10 bg-nurvera-olive text-white text-[10px] font-bold px-4 py-1.5 uppercase tracking-widest shadow-sm">
-                        {product.badge}
-                      </div>
-                    )}
-                    <Image 
-                      src={product.image} 
-                      alt={product.name} 
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-1000 group-hover:scale-[1.03]"
-                    />
-                  </Link>
-
-                  {/* İçerik Alanı */}
-                  <div className="p-8 flex flex-col flex-grow bg-white">
-                    <div className="flex-grow">
-                      <Link href={`/urunler/${product.id}`}>
-                        <h3 className="font-serif text-2xl font-normal text-nurvera-text mb-2 hover:text-nurvera-olive transition-colors cursor-pointer">{product.name}</h3>
-                      </Link>
-                      <div className="text-nurvera-accent/80 text-[11px] font-bold tracking-[0.15em] uppercase mb-4">
-                        {product.description}
-                      </div>
-                      <div className="flex justify-between items-end mt-6">
-                        <span className="text-xl font-medium text-nurvera-olive">{product.price}</span>
-                        <span className="text-sm text-gray-400">{product.volume}</span>
-                      </div>
-                    </div>
-                    
-                    <div className="flex gap-4 mt-8 pt-6 border-t border-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">
-                      <button 
-                        onClick={(e) => handleAddToCart(product, e)}
-                        className="flex-1 flex justify-center items-center py-4 bg-nurvera-olive text-white text-xs font-bold tracking-widest uppercase hover:bg-[#4a5e29] transition-colors"
-                      >
-                        Sepete Ekle
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
+                  {cat}
+                </button>
               ))}
-            </AnimatePresence>
-          </motion.div>
+            </div>
+          </div>
+
+          {/* Ürün Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {filteredProducts.map((product, index) => (
+              <motion.div 
+                key={product.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group flex flex-col"
+              >
+                <Link href={`/urunler/${product.id}`} className="block relative aspect-[4/5] rounded-2xl overflow-hidden bg-nurvera-bg mb-4">
+                  <Image 
+                    src={product.image} 
+                    alt={product.name} 
+                    fill 
+                    className="object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Hızlı Ekle Butonu */}
+                  <button 
+                    onClick={(e) => handleAddToCart(e, product)}
+                    className="absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-white/95 backdrop-blur-sm text-nurvera-forest px-6 py-3 rounded-full flex items-center shadow-lg hover:bg-nurvera-forest hover:text-white font-medium text-sm w-[85%] justify-center"
+                  >
+                    <ShoppingBag size={16} className="mr-2" />
+                    Sepete Ekle
+                  </button>
+
+                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold tracking-wider text-nurvera-forest">
+                    {product.size}
+                  </div>
+                </Link>
+
+                <div className="flex flex-col flex-grow px-2">
+                  <div className="flex justify-between items-start mb-2">
+                    <Link href={`/urunler/${product.id}`}>
+                      <h3 className="text-lg font-serif text-nurvera-text group-hover:text-nurvera-olive transition-colors">{product.name}</h3>
+                    </Link>
+                    <span className="text-lg font-medium text-nurvera-forest">{product.price} TL</span>
+                  </div>
+                  <p className="text-sm text-nurvera-text/60 line-clamp-2 mb-4 flex-grow">
+                    {product.shortDesc}
+                  </p>
+                  <div className="flex items-center justify-between text-xs font-medium uppercase tracking-wider text-nurvera-text/40 pt-2 border-t border-black/5">
+                    <span>{product.category}</span>
+                    <Link href={`/urunler/${product.id}`} className="flex items-center text-nurvera-olive hover:text-nurvera-forest transition-colors">
+                      İncele <ChevronRight size={14} className="ml-1" />
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
         </div>
-      </div>
+      </section>
     </>
   );
 }

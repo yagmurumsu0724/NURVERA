@@ -34,12 +34,12 @@ export default function SulukPage() {
   ];
 
   const benefits = [
-    { icon: Droplet, title: "DOĞAL ENZİM MUCİZESİ", desc: "Sülüklerin salgıladığı yüze yakın biyoaktif enzim vücuda şifa dağıtır." },
-    { icon: Activity, title: "DOLAŞIM DÜZENLEYİCİ", desc: "Bölgesel kan akışını hızlandırarak dokuların beslenmesini artırır." },
-    { icon: Shield, title: "DOĞAL ANTİ-ENFLAMATUAR", desc: "İltihap giderici enzimler sayesinde vücuttaki şişlikleri ve ödemi azaltır." },
-    { icon: Zap, title: "AĞRI KESİCİ ETKİ", desc: "İçerdiği doğal anestezik maddelerle kas ve eklem ağrılarını hafifletir." },
-    { icon: HeartPulse, title: "DAMAR SAĞLIĞI", desc: "Kanın akışkanlığını artırarak damar tıkanıklığı riskini destekleyici şekilde azaltır." },
-    { icon: Sparkles, title: "HÜCRE YENİLENMESİ", desc: "Bozulan dokuların hızla onarılmasına ve hücrelerin yenilenmesine katkıda bulunur." }
+    { id: "dogal-enzim-mucizesi", icon: Droplet, title: "DOĞAL ENZİM MUCİZESİ", desc: "Sülüklerin salgıladığı yüze yakın biyoaktif enzim vücuda şifa dağıtır." },
+    { id: "dolasim-duzenleyici", icon: Activity, title: "DOLAŞIM DÜZENLEYİCİ", desc: "Bölgesel kan akışını hızlandırarak dokuların beslenmesini artırır." },
+    { id: "dogal-anti-enflamatuar", icon: Shield, title: "DOĞAL ANTİ-ENFLAMATUAR", desc: "İltihap giderici enzimler sayesinde vücuttaki şişlikleri ve ödemi azaltır." },
+    { id: "agri-kesici-etki", icon: Zap, title: "AĞRI KESİCİ ETKİ", desc: "İçerdiği doğal anestezik maddelerle kas ve eklem ağrılarını hafifletir." },
+    { id: "damar-sagligi", icon: HeartPulse, title: "DAMAR SAĞLIĞI", desc: "Kanın akışkanlığını artırarak damar tıkanıklığı riskini destekleyici şekilde azaltır." },
+    { id: "hucre-yenilenmesi", icon: Sparkles, title: "HÜCRE YENİLENMESİ", desc: "Bozulan dokuların hızla onarılmasına ve hücrelerin yenilenmesine katkıda bulunur." }
   ];
 
   const fadeInUp = {
@@ -60,9 +60,20 @@ export default function SulukPage() {
       </Head>
 
       {/* Premium Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden bg-gradient-to-br from-[#0f241a] via-[#1a3c34] to-[#1a3128]">
+      <section className="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden bg-[#0f241a]">
+        
+        {/* Fotoğraf (Bulanık Arka Plan) */}
+        <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50 blur-[3px] scale-105"
+            style={{ backgroundImage: "url('/images/suluk_nasil_calisir_1782115135637.png')" }}
+          ></div>
+          {/* Karartma Gradyanı (Yazıların net okunabilmesi için) */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0f241a]/80 via-[#1a3c34]/50 to-[#122820]/80"></div>
+        </div>
+
         {/* Dekoratif Arkaplan Işıkları */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
           <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[50%] bg-[#8b9b8b]/20 blur-[120px] rounded-full mix-blend-screen"></div>
           <div className="absolute bottom-[-20%] left-[-10%] w-[60%] h-[60%] bg-[#d4af37]/10 blur-[150px] rounded-full mix-blend-screen"></div>
         </div>
@@ -136,16 +147,21 @@ export default function SulukPage() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
           >
             {benefits.map((benefit, index) => (
-              <motion.div 
-                key={index} variants={fadeInUp}
-                className="bg-white p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-nurvera-olive/10 hover:-translate-y-2 transition-transform duration-500 group"
-              >
-                <div className="w-14 h-14 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mb-6 group-hover:bg-nurvera-forest transition-colors">
-                  <benefit.icon className="w-7 h-7 text-[#c5a028] group-hover:text-white transition-colors" />
-                </div>
-                <h3 className="text-lg font-bold text-nurvera-text mb-3 tracking-wide">{benefit.title}</h3>
-                <p className="text-nurvera-text/70 leading-relaxed font-light">{benefit.desc}</p>
-              </motion.div>
+              <Link href={`/suluk/faydalar/${benefit.id}`} key={index}>
+                <motion.div 
+                  variants={fadeInUp}
+                  className="bg-white p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-nurvera-olive/10 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 group h-full cursor-pointer"
+                >
+                  <div className="w-14 h-14 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mb-6 group-hover:bg-nurvera-forest transition-colors">
+                    <benefit.icon className="w-7 h-7 text-[#c5a028] group-hover:text-white transition-colors" />
+                  </div>
+                  <h3 className="text-lg font-bold text-nurvera-text mb-3 tracking-wide group-hover:text-nurvera-olive transition-colors">{benefit.title}</h3>
+                  <p className="text-nurvera-text/70 leading-relaxed font-light mb-4">{benefit.desc}</p>
+                  <div className="text-nurvera-olive text-sm font-medium flex items-center group-hover:text-[#c5a028] transition-colors">
+                    Detaylı İncele <span className="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
+                  </div>
+                </motion.div>
+              </Link>
             ))}
           </motion.div>
         </div>

@@ -1,90 +1,124 @@
 export const products = [
+  // MEVCUT ÖZEL GÖRSELLİ VE DETAYLI ÜRÜNLER (7 ADET)
   {
-    id: 1,
-    slug: 'hayit-tenturu',
-    name: 'Hayıt Tentürü',
-    description: '%100 Doğal • Alkolsüz',
-    shortDescription: 'Özellikle kadınların döngüsel dönemlerinde rahatlama sağlamak amacıyla kullanılan, tamamen doğal ve katkısız olarak elde edilen Hayıt ekstraktı.',
-    price: '350,00 ₺',
-    image: '/images/product_hayit.png',
-    images: [
-      '/images/product_hayit.png'
-    ],
-    badge: 'Yeni',
-    volume: '100 ml',
-    ingredients: '%100 Vitex agnus-castus (Hayıt) tohumu ekstraktı, bitkisel gliserin. Alkol, şeker, koruyucu ve renklendirici içermez.',
-    usage: 'Günde 1 kez, yarım çay bardağı suya 20-30 damla damlatılarak tüketilmesi tavsiye edilir. Kullanmadan önce şişeyi iyice çalkalayınız.',
-    warnings: 'Hamile ve emziren kadınların, kronik rahatsızlığı olanların kullanmadan önce hekime danışması önerilir. Çocukların ulaşamayacağı, serin ve güneş görmeyen yerde saklayınız. İlaç değildir.'
+    id: "kantaron-yagi",
+    name: "Kantaron Yağı",
+    category: "Yağlar",
+    price: 250,
+    size: "100 ml",
+    image: "/images/product_kantaron_yagi_1782125924974.png", 
+    shortDesc: "Yara, yanık ve cilt onarımı için geleneksel şifa kaynağı.",
+    description: "NURVERA Kantaron Yağı, en taze sarı kantaron çiçeklerinin saf zeytinyağında güneşte bekletilmesiyle (maserasyon) elde edilen, tamamen doğal ve onarıcı bir cilt bakım yağıdır. Hücre yenileyici özelliği sayesinde yara, yanık, çizik ve güneş yanığı gibi tahrişlerde cildin kendi kendini onarma sürecini hızlandırır.",
+    usage: "Sorunlu bölgeye birkaç damla damlatıp nazikçe masaj yaparak uygulayın. Gece kullanımı cilt emilimi açısından daha etkilidir.",
+    ingredients: "Olea Europaea Fruit Oil (Zeytinyağı), Hypericum Perforatum Extract (Sarı Kantaron Ekstraktı)."
   },
   {
-    id: 2,
-    slug: 'papatya-hidrosolu',
-    name: 'Papatya Hidrosolü',
-    description: 'Saf & Katkısız',
-    shortDescription: 'Hassas ciltleri yatıştırır ve rahatlatır. %100 saf ve doğal, bakır imbikte odun ateşinde distile edilmiştir.',
-    price: '240,00 ₺',
-    image: '/images/product_papatya.png',
-    images: [
-      '/images/product_papatya.png'
-    ],
-    badge: 'Çok Satan',
-    volume: '100 ml',
-    ingredients: '%100 Matricaria recutita (Papatya) uçucu yağı altı suyu (Hidrosol). Paraben, sülfat, sentetik koku ve boya içermez.',
-    usage: 'Temizlenmiş cildinize 15-20 cm uzaktan doğrudan püskürtebilir veya pamuk yardımıyla yüzünüze uygulayabilirsiniz. Gün içinde cildinizi ferahlatmak için dilediğiniz sıklıkta kullanabilirsiniz.',
-    warnings: 'Sadece harici kullanım içindir. Göz ile temasından kaçınınız. Buzdolabında saklanması raf ömrünü uzatır ve ferahlatıcı etkisini artırır.'
+    id: "aynisefa-yagi",
+    name: "Aynısefa Yağı",
+    category: "Yağlar",
+    price: 240,
+    size: "100 ml",
+    image: "/images/product_aynisefa_yagi_1782125936787.png", 
+    shortDesc: "Kuru ve hassas ciltler için derinlemesine nemlendirici ve yatıştırıcı.",
+    description: "Canlı turuncu aynısefa (Calendula) çiçeklerinden elde edilen bu özel yağ, özellikle çok kuru, çatlamış ve hassasiyet gösteren ciltler için mucizevi bir yatıştırıcıdır. Doğal bir cilt bariyeri oluşturarak nem kaybını önler ve egzama, pişik gibi sorunlarda cildi rahatlatır.",
+    usage: "Cilt temizliğinden sonra ihtiyaç duyulan bölgeye ince bir tabaka halinde sürerek uygulayın. Günlük kullanıma uygundur.",
+    ingredients: "Olea Europaea Fruit Oil, Calendula Officinalis Flower Extract."
   },
   {
-    id: 3,
-    slug: 'alic-sirkesi',
-    name: 'Alıç Sirkesi',
-    description: 'Doğal Fermente',
-    shortDescription: 'Doğal fermentasyon yöntemiyle aylarca bekletilerek elde edilen, filtrelenmemiş ve pastörize edilmemiş canlı sirkedir.',
-    price: '180,00 ₺',
-    image: '/images/product_alic.png',
-    images: [
-      '/images/product_alic.png'
-    ],
-    badge: '',
-    volume: '500 ml',
-    ingredients: '%100 Doğal Alıç meyvesi, içme suyu. Sirke anası (canlı maya) içerebilir.',
-    usage: 'Sabahları aç karnına veya öğün aralarında bir bardak ılık suya 1-2 tatlı kaşığı ekleyerek tüketebilirsiniz. Salatalarınıza sos olarak kullanabilirsiniz.',
-    warnings: 'Güneş ışığından uzak, serin ve kuru yerde muhafaza ediniz. Kapak açıldıktan sonra buzdolabında saklayınız. Tortu yapması doğal fermentasyonun kanıtıdır, bozulma belirtisi değildir.'
+    id: "papatya-yagi",
+    name: "Papatya Yağı",
+    category: "Yağlar",
+    price: 280,
+    size: "100 ml",
+    image: "/images/product_papatya_yagi_1782125947467.png", 
+    shortDesc: "Stresli ciltler ve bebekler için yumuşatıcı, sakinleştirici doğal bakım.",
+    description: "Doğanın en zarif yatıştırıcısı olan papatyadan elde edilen NURVERA Papatya Yağı, alerjiye eğilimli, kızarık ve stresli ciltleri sakinleştirmek için idealdir. Anti-enflamatuar özellikleri sayesinde cilt döküntülerinde rahatlama sağlar. Bebek masajlarında güvenle kullanılabilir.",
+    usage: "Avuç içinizde ısıttığınız birkaç damla yağı, dairesel hareketlerle masaj yaparak uygulayın.",
+    ingredients: "Olea Europaea Fruit Oil, Chamomilla Recutita Flower Extract."
   },
   {
-    id: 4,
-    slug: 'elma-sirkesi',
-    name: 'Elma Sirkesi',
-    description: 'Doğal Fermente',
-    shortDescription: 'Mevsiminde toplanan en kaliteli elmalardan doğal fermentasyonla elde edilen, probiyotik açısından zengin canlı sirke.',
-    price: '160,00 ₺',
-    image: '/images/product_elma.png',
-    images: [
-      '/images/product_elma.png'
-    ],
-    badge: '',
-    volume: '500 ml',
-    ingredients: '%100 Doğal Elma, içme suyu. Katkı, koruyucu ve suni asetik asit içermez.',
-    usage: 'Cilt toniği olarak yarı yarıya su ile seyreltilerek kullanılabilir. Beslenmede ise salatalara ve içme suyuna eklenerek tüketilmesi önerilir.',
-    warnings: 'Mide hassasiyeti olanların dikkatli tüketmesi önerilir. Doğal yapısından dolayı renk değişimi ve tortulaşma olabilir.'
+    id: "dogal-vazelin",
+    name: "Doğal Vazelin",
+    category: "Kremler",
+    price: 180,
+    size: "50 gr",
+    image: "/images/product_dogal_vazelin_1782125960599.png", 
+    shortDesc: "Petrol içermeyen, saf balmumu ve doğal yağlarla hazırlanan onarıcı formül.",
+    description: "Piyasadaki petrol türevi sentetik vazelinlerin aksine, NURVERA Doğal Vazelin tamamen saf balmumu ve besleyici bitkisel yağların mükemmel uyumuyla formüle edilmiştir. Cildin nefes almasını engellemeden mükemmel bir koruyucu bariyer oluşturur. Topuk ve dirsek çatlaklarında çok etkilidir.",
+    usage: "Özellikle kuruyan ve çatlayan bölgelere (dudak, topuk, dirsek, diz) nohut büyüklüğünde alıp masaj yaparak yedirin.",
+    ingredients: "Cera Alba (Balmumu), Olea Europaea Fruit Oil, Prunus Amygdalus Dulcis Oil (Tatlı Badem Yağı)."
   },
   {
-    id: 5,
-    slug: 'sari-kantaron-yagi',
-    name: 'Sarı Kantaron Yağı',
-    description: 'Soğuk Sıkım',
-    shortDescription: 'Güneşte bekletilerek sızma zeytinyağında maserasyon yöntemiyle elde edilen, cilt onarıcı etkisiyle bilinen mucizevi yağ.',
-    price: '290,00 ₺',
-    image: '/images/product_kantaron.png',
-    images: [
-      '/images/product_kantaron.png'
-    ],
-    badge: 'Çok Satan',
-    volume: '100 ml',
-    ingredients: 'Hypericum perforatum (Sarı Kantaron) çiçekleri, Soğuk sıkım sızma zeytinyağı.',
-    usage: 'İhtiyaç duyulan bölgeye birkaç damla damlatılarak hafif masaj hareketleriyle cilde yedirilir. Geceleri kullanılması tavsiye edilir.',
-    warnings: 'Işığa duyarlılığı artırabileceğinden, ürünü kullandıktan sonra güneşe çıkılması tavsiye edilmez (Leke yapabilir). Serin ve karanlık yerde saklayınız.'
-  }
-];
+    id: "aynisefa-kremi",
+    name: "Aynısefa Kremi",
+    category: "Kremler",
+    price: 240,
+    size: "50 gr",
+    image: "/images/product_aynisefa_kremi_1782125981258.png", 
+    shortDesc: "Egzama, mantar ve ciddi cilt kuruluklarında onarıcı, yatıştırıcı bakım.",
+    description: "Yoğunlaştırılmış Aynısefa ekstresi içeren bu yoğun bakım kremi, cildin savunma mekanizmasını güçlendirir. Sedef, egzama ve şiddetli cilt kaşıntılarında cildin nem dengesini hızla toparlayarak iyileşme sürecini destekler. Su bazlı değil, onarıcı yağ bazlı bir merhemdir.",
+    usage: "Sorunlu bölgeye ince bir film tabakası şeklinde uygulayın. Açık kanamalı yaralar hariç tüm yüzeysel cilt sorunlarında kullanılabilir.",
+    ingredients: "Calendula Officinalis Extract, Cera Alba, Butyrospermum Parkii Butter (Shea Yağı)."
+  },
+  {
+    id: "bitkisel-masaj-kremi",
+    name: "Bitkisel Masaj Kremi",
+    category: "Kremler",
+    price: 320,
+    size: "100 gr",
+    image: "/images/product_bitkisel_masaj_kremi_1782125993189.png", 
+    shortDesc: "Kas ve eklem ağrılarını rahatlatan doğal uçucu yağ formülasyonu.",
+    description: "İçeriğindeki kafur, nane, okaliptüs ve kekik gibi güçlü uçucu yağların sinerjisiyle formüle edilen bu krem, kas yorgunlukları, eklem tutulmaları ve spazmlarda derinlemesine bir rahatlama hissi sunar. Sürüldüğü bölgede önce ferahlama, sonra hafif bir ısınma etkisi yaratır.",
+    usage: "Ağrıyan veya tutulan bölgeye 5-10 dakika boyunca güçlü dairesel masaj hareketleriyle yedirin.",
+    ingredients: "Mentha Piperita Oil, Eucalyptus Globulus Leaf Oil, Thymus Vulgaris Oil, Cinnamomum Camphora."
+  },
+  {
+    id: "catlak-bakim-kremi",
+    name: "Çatlak Bakım Kremi",
+    category: "Kremler",
+    price: 350,
+    size: "100 gr",
+    image: "/images/product_catlak_bakim_kremi_1782126004648.png", 
+    shortDesc: "Hamilelik ve kilo değişimlerinde cilt elastikiyetini koruyan mucizevi bariyer.",
+    description: "Cildin esneme payını maksimuma çıkaran, zengin E vitamini, kakao yağı ve Hindistan cevizi yağı içeriğiyle çatlak oluşumunu büyük ölçüde engeller. Hamilelik sürecinde büyüyen karın bölgesi ve ergenlikteki hızlı boy atma dönemleri için özel olarak geliştirilmiştir.",
+    usage: "Günde en az iki kez (sabah ve akşam) karın, basen ve göğüs bölgelerine yukarı doğru dairesel hareketlerle uygulayın.",
+    ingredients: "Theobroma Cacao Seed Butter, Cocos Nucifera Oil, Triticum Vulgare Germ Oil (Ruşeym Yağı), Tocopherol."
+  },
 
-export const getProductById = (id) => products.find(p => p.id === parseInt(id));
-export const getProductBySlug = (slug) => products.find(p => p.slug === slug);
+  // DİĞER 27 YAĞ (KOTA DOLDUĞU İÇİN NURVERA LOGOSU İLE)
+  { id: "kudret-nari-yagi", name: "Kudret Narı Yağı", category: "Yağlar", price: 290, size: "100 ml", image: "/images/kudret_nari_yagi_1782141144667.png", shortDesc: "Mide ve sindirim dostu, onarıcı geleneksel yağ.", description: "Saf sızma zeytinyağında bekletilerek elde edilen Kudret Narı yağı, NURVERA kalitesiyle özenle hazırlanmıştır.", usage: "İhtiyaç duyulan bölgeye nazikçe uygulayınız.", ingredients: "%100 Doğal Bitkisel Yağ" },
+  { id: "altin-otu-yagi", name: "Altın Otu Yağı", category: "Yağlar", price: 280, size: "50 ml", image: "/images/altin_otu_yagi_1782160190750.png", shortDesc: "Antioksidan açısından zengin koruyucu bakım.", description: "NURVERA Altın Otu Yağı, geleneksel yöntemlerle elde edilmiş doğal bir bakım yağıdır.", usage: "İhtiyaç duyulan bölgeye nazikçe uygulayınız.", ingredients: "%100 Doğal Bitkisel Yağ" },
+  { id: "sarimsak-yagi", name: "Sarımsak Yağı", category: "Yağlar", price: 180, size: "100 ml", image: "/images/sarimsak_yagi_1782160200775.png", shortDesc: "Saç ve saç derisi için güçlendirici bakım.", description: "Zayıf ve dökülen saçları kökten uca besleyen, antibakteriyel özelliklere sahip NURVERA Sarımsak Yağı.", usage: "Saç diplerine masaj yaparak uygulayıp en az 1 saat beklettikten sonra yıkayınız.", ingredients: "%100 Doğal Bitkisel Yağ" },
+  { id: "limon-yagi", name: "Limon Yağı", category: "Yağlar", price: 180, size: "30 ml", image: "/images/limon_yagi_1782141194142.png", shortDesc: "Canlandırıcı ve arındırıcı saf uçucu yağ.", description: "Taze limon kabuklarından elde edilen, ferahlatıcı etkiye sahip NURVERA Limon Yağı.", usage: "Sabit bir yağa karıştırarak uygulayınız veya buhurdanlıkta kullanınız.", ingredients: "%100 Doğal Uçucu Yağ" },
+  { id: "portakal-yagi", name: "Portakal Yağı", category: "Yağlar", price: 180, size: "30 ml", image: "/images/portakal_yagi_1782141205535.png", shortDesc: "Enerji veren ve cildi tazeleyen saf uçucu yağ.", description: "Selülit masajlarında da tercih edilen, yüksek C vitamini kaynağı NURVERA Portakal Yağı.", usage: "Sabit bir yağa karıştırarak masaj yağı olarak kullanınız.", ingredients: "%100 Doğal Uçucu Yağ" },
+  { id: "aci-biber-yagi", name: "Acı Biber Yağı", category: "Yağlar", price: 220, size: "100 ml", image: "/images/aci_biber_yagi_1782160210720.png", shortDesc: "Kan dolaşımını hızlandıran ısıtıcı bakım.", description: "Özellikle spor masajlarında ve kas ağrılarında rahatlatıcı etkisi bilinen geleneksel NURVERA yağı.", usage: "Masaj ile ihtiyaç duyulan bölgeye uygulayınız.", ingredients: "%100 Doğal Bitkisel Yağ" },
+  { id: "hava-civa-yagi", name: "Hava Cıva Yağı", category: "Yağlar", price: 240, size: "100 ml", image: "/images/hava_civa_yagi_1782160221260.png", shortDesc: "Geleneksel yara ve onarım yağı.", description: "Yüzyıllardır Anadolu'da kullanılan, kırmızı rengini bitkiden alan doğal NURVERA şifası.", usage: "Sorunlu yüzeye ince bir tabaka olarak uygulayınız.", ingredients: "%100 Doğal Bitkisel Yağ" },
+  { id: "corek-otu-yagi", name: "Çörek Otu Yağı", category: "Yağlar", price: 350, size: "250 ml", image: "/images/corek_otu_yagi_1782141226989.png", shortDesc: "Soğuk sıkım, koruyucu mucizevi yağ.", description: "Yüksek kalitedeki tohumlardan soğuk sıkım yöntemiyle çıkarılan premium NURVERA Çörek Otu Yağı.", usage: "Cilde veya saça uygulayabilirsiniz.", ingredients: "Nigella Sativa Seed Oil" },
+  { id: "susam-yagi", name: "Susam Yağı", category: "Yağlar", price: 280, size: "250 ml", image: "/images/susam_yagi_1782141291802.png", shortDesc: "Güneş koruyucu ve yoğun besleyici.", description: "Cildi kuruluktan koruyan, Ayurveda masajlarının vazgeçilmezi NURVERA Susam Yağı.", usage: "Tüm vücuda masaj yaparak uygulayabilirsiniz.", ingredients: "%100 Doğal Sabit Yağ" },
+  { id: "findik-yagi", name: "Fındık Yağı", category: "Yağlar", price: 220, size: "100 ml", image: "/images/findik_yagi_1782160230374.png", shortDesc: "Hafif yapılı, nemlendirici cilt bakım yağı.", description: "Cilt tarafından kolayca emilen, gözenekleri tıkamayan doğal NURVERA yağı.", usage: "Temiz cilde birkaç damla uygulayınız.", ingredients: "%100 Doğal Sabit Yağ" },
+  { id: "argan-yagi", name: "Argan Yağı", category: "Yağlar", price: 450, size: "50 ml", image: "/images/argan_yagi_1782141237599.png", shortDesc: "Saç ve cilt için Fas'ın sıvı altın mucizesi.", description: "E vitamini açısından son derece zengin, anti-aging etkili premium NURVERA Argan Yağı.", usage: "Cilde veya saç uçlarına doğrudan uygulayınız.", ingredients: "Argania Spinosa Kernel Oil" },
+  { id: "badem-yagi", name: "Badem Yağı", category: "Yağlar", price: 220, size: "100 ml", image: "/images/badem_yagi_1782160246626.png", shortDesc: "Saç, kaş ve kirpik için besleyici tatlı badem.", description: "Hassas ciltler dahil tüm cilt tiplerinin kullanımına uygun doğal NURVERA Badem Yağı.", usage: "Saç veya cilde masajla yedirerek uygulayınız.", ingredients: "Prunus Amygdalus Dulcis Oil" },
+  { id: "defne-yagi", name: "Defne Yağı", category: "Yağlar", price: 250, size: "100 ml", image: "/images/defne_yagi_1782141301746.png", shortDesc: "Saç dökülmesine karşı güçlü koruma.", description: "Akdeniz'in şifalı bitkisi defneden elde edilen, saçı ve cildi canlandıran NURVERA yağı.", usage: "Saç diplerine uygulayıp bekletiniz.", ingredients: "%100 Doğal Bitkisel Yağ" },
+  { id: "avokado-yagi", name: "Avokado Yağı", category: "Yağlar", price: 260, size: "100 ml", image: "/images/avokado_yagi_1782141313320.png", shortDesc: "Kuru ve yıpranmış ciltler için yoğun nem.", description: "Omega yağ asitlerince zengin, kolajen üretimini destekleyen doğal NURVERA Avokado Yağı.", usage: "Temiz cilde ince bir tabaka halinde masaj yaparak sürün.", ingredients: "Persea Gratissima Oil" },
+  { id: "kusburnu-yagi", name: "Kuşburnu Yağı", category: "Yağlar", price: 350, size: "50 ml", image: "/images/kusburnu_yagi_1782160257565.png", shortDesc: "Leke karşıtı ve yaşlanma geciktirici.", description: "Doğal A vitamini içeriğiyle cilt tonunu eşitlemeye yardımcı olan premium NURVERA Kuşburnu Çekirdeği Yağı.", usage: "Geceleri temiz cilde 2-3 damla uygulayın.", ingredients: "Rosa Canina Seed Oil" },
+  { id: "nar-cekirdegi-yagi", name: "Nar Çekirdeği Yağı", category: "Yağlar", price: 390, size: "50 ml", image: "/images/nar_cekirdegi_yagi_1782160268068.png", shortDesc: "Güçlü antioksidan ve hücre yenileyici.", description: "Punisinik asit kaynağı, cilt elastikiyetini koruyan premium NURVERA Nar Çekirdeği Yağı.", usage: "Göz çevresi ve yüz için yaşlanma karşıtı serum olarak kullanılabilir.", ingredients: "Punica Granatum Seed Oil" },
+  { id: "at-kestanesi-yagi", name: "At Kestanesi Yağı", category: "Yağlar", price: 230, size: "100 ml", image: "/images/at_kestanesi_yagi_1782160281921.png", shortDesc: "Dolaşım destekleyici ve rahatlatıcı.", description: "Bacaklardaki yorgunluk hissini ve varis görünümünü hafifletmeye yardımcı NURVERA yağı.", usage: "Bacaklara aşağıdan yukarıya doğru masaj yaparak uygulayın.", ingredients: "%100 Doğal Bitkisel Yağ" },
+  { id: "isirgan-yagi", name: "Isırgan Yağı", category: "Yağlar", price: 220, size: "100 ml", image: "/images/isirgan_yagi_1782141324420.png", shortDesc: "Saç köklerini uyaran bakım yağı.", description: "Zayıf saçları kalınlaştırmaya ve dökülmeyi azaltmaya yardımcı doğal NURVERA Isırgan Yağı.", usage: "Saç diplerine masaj yaparak uygulayın.", ingredients: "%100 Doğal Bitkisel Yağ" },
+  { id: "biberiye-yagi", name: "Biberiye Yağı", category: "Yağlar", price: 180, size: "50 ml", image: "/images/biberiye_yagi_1782141335357.png", shortDesc: "Saç büyümesini destekleyen canlandırıcı uçucu yağ.", description: "Zihni tazeleyen ve saç derisini uyaran saf NURVERA Biberiye Yağı.", usage: "Sabit bir yağ ile seyrelterek uygulayın.", ingredients: "%100 Doğal Uçucu Yağ" },
+  { id: "lavanta-yagi", name: "Lavanta Yağı", category: "Yağlar", price: 220, size: "50 ml", image: "/images/lavanta_yagi_1782160290179.png", shortDesc: "Sakinleştirici ve uyku düzenleyici uçucu yağ.", description: "Cildi yatıştıran, kokusuyla huzur veren saf NURVERA Lavanta Yağı.", usage: "Yastığınıza damlatabilir veya ciltte seyrelterek kullanabilirsiniz.", ingredients: "%100 Doğal Uçucu Yağ" },
+  { id: "cay-agaci-yagi", name: "Çay Ağacı Yağı", category: "Yağlar", price: 220, size: "30 ml", image: "/images/cay_agaci_yagi_1782141261843.png", shortDesc: "Akne ve sivilce kurutucu antibakteriyel yağ.", description: "Lokal cilt pürüzleri ve tırnak mantarında etkili saf NURVERA Çay Ağacı Yağı.", usage: "Sivilcelerin üzerine kulak çubuğu ile lokal uygulanabilir.", ingredients: "%100 Doğal Uçucu Yağ" },
+  { id: "nane-yagi", name: "Nane Yağı", category: "Yağlar", price: 180, size: "30 ml", image: "/images/nane_yagi_1782160306849.png", shortDesc: "Baş ağrısı ve migren için ferahlatıcı.", description: "Güçlü mentol etkisiyle nefes açan saf NURVERA Nane Yağı.", usage: "Şakaklara seyreltilmiş olarak hafifçe masaj yapılabilir.", ingredients: "%100 Doğal Uçucu Yağ" },
+  { id: "kekik-yagi", name: "Kekik Yağı", category: "Yağlar", price: 220, size: "30 ml", image: "/images/kekik_yagi_1782160317679.png", shortDesc: "Güçlü antiseptik ve arındırıcı uçucu yağ.", description: "Doğanın en güçlü temizleyici bitkilerinden elde edilen saf NURVERA Kekik Yağı.", usage: "Mutlaka zeytinyağı vb. taşıyıcı yağ ile seyreltilerek kullanılmalıdır.", ingredients: "%100 Doğal Uçucu Yağ" },
+  { id: "okaliptus-yagi", name: "Okaliptüs Yağı", category: "Yağlar", price: 190, size: "30 ml", image: "/images/okaliptus_yagi_1782160328697.png", shortDesc: "Solunum yollarını rahatlatan nefes açıcı.", description: "Göğüs masajlarında ve buhurdanlıklarda kullanılan saf NURVERA Okaliptüs Yağı.", usage: "Buhar banyosunda veya sabit yağa karıştırarak masajla uygulayın.", ingredients: "%100 Doğal Uçucu Yağ" },
+  { id: "gul-yagi", name: "Gül Yağı", category: "Yağlar", price: 650, size: "20 ml", image: "/images/gul_yagi_1782141249537.png", shortDesc: "Lüks anti-aging ve frekansı en yüksek yağ.", description: "Isparta güllerinden elde edilen, cilt onarıcı özellikli premium NURVERA Gül Yağı.", usage: "Cilt bakım kremlerinize damlatabilir veya tek başına seyrelterek kullanabilirsiniz.", ingredients: "%100 Doğal Uçucu Yağ" },
+  { id: "jojoba-yagi", name: "Jojoba Yağı", category: "Yağlar", price: 350, size: "50 ml", image: "/images/jojoba_yagi_1782141273203.png", shortDesc: "Cilt sebumuna en yakın dengeleyici yağ.", description: "Tüm cilt tipleri için uygun, mükemmel bir doğal nemlendirici olan NURVERA Jojoba Yağı.", usage: "Temiz cilde makyaj altı bazı veya gece serumu olarak uygulayın.", ingredients: "Simmondsia Chinensis Seed Oil" },
+  { id: "cam-terebentin", name: "Çam Terebentin", category: "Yağlar", price: 180, size: "100 ml", image: "/images/cam_terebentin_1782160339456.png", shortDesc: "Saç dökülmesini durduran ve hızlı uzatan bakım.", description: "Çam reçinesinden elde edilen, şampuanlara katılarak kullanılan NURVERA Çam Terebentin Yağı.", usage: "Şampuan şişenize (400ml) 1 kapak ekleyerek kullanınız.", ingredients: "%100 Doğal Uçucu Yağ" },
+
+  // DİĞER 3 KREM (KOTA DOLDUĞU İÇİN NURVERA LOGOSU İLE EŞLEŞTİRİLDİ)
+  { id: "pisik-kremi", name: "Pişik Kremi", category: "Kremler", price: 250, size: "50 gr", image: "/images/pisik_kremi_1782141172230.png", shortDesc: "Bebeklerin hassas cildi için çinko oksit destekli bariyer.", description: "Bebeklerin narin cildini idrar ve dışkının tahriş edici etkisinden korur. NURVERA'nın doğal formülü sentetik parfüm içermez.", usage: "Her bez değişiminde ince bir tabaka halinde uygulayın.", ingredients: "Zinc Oxide (Non-nano), Calendula Officinalis Extract, Cera Alba, Olea Europaea Fruit Oil." },
+  { id: "yogun-cilt-bariyer-bakim-kremi", name: "Yoğun Cilt Bariyer Bakım Kremi", category: "Kremler", price: 320, size: "50 gr", image: "/images/cilt_bariyer_kremi_1782160349936.png", shortDesc: "Dış etkenlere karşı kalkan görevi gören yoğun koruma.", description: "Cildin koruyucu bariyerini onaran ve nemi hapseden NURVERA özel formül krem.", usage: "Temiz cilde ihtiyaç duyuldukça uygulayınız.", ingredients: "Doğal Yağlar ve Balmumu Karışımı" },
+  { id: "yogun-nemlendirici-bakim-kremi", name: "Yoğun Nemlendirici Bakım Kremi", category: "Kremler", price: 320, size: "50 gr", image: "/images/nemlendirici_krem_1782160366477.png", shortDesc: "Kuru ciltler için anında rahatlama ve su tutma kapasitesi.", description: "Cilde derinlemesine nüfuz ederek pul pul dökülmeleri engelleyen NURVERA Nemlendirici Krem.", usage: "Sabah ve akşam tüm yüze veya kuruyan bölgelere uygulayınız.", ingredients: "Doğal Yağlar Karışımı" },
+  { id: "yagli-ve-akneye-egilimli-cilt-bakim-kremi", name: "Yağlı ve Akneye Eğilimli Cilt Bakım Kremi", category: "Kremler", price: 280, size: "30 gr", image: "/images/akne_kremi_1782160377366.png", shortDesc: "Sebum dengeleyici ve matlaştırıcı günlük krem.", description: "Sivilceye meyilli ciltleri yağlandırmadan nemlendiren NURVERA formülü.", usage: "Temiz cilde çok ince bir tabaka halinde uygulayın.", ingredients: "Doğal Sebum Dengeleyici Yağlar" },
+  { id: "dudak-balmi", name: "Dudak Balmı", category: "Kremler", price: 120, size: "15 gr", image: "/images/dudak_balmi_1782141162763.png", shortDesc: "Soğuk hava ve kuruluğa karşı %100 doğal, yenilebilir içerik.", description: "Kışın dondurucu soğuğunda dudaklarınızı koruyan, vazelin ve paraben içermeyen NURVERA Dudak Balmı.", usage: "Dudaklarınızda kuruluk hissettiğiniz her an güvenle uygulayabilirsiniz.", ingredients: "Cocos Nucifera Oil, Cera Alba, Butyrospermum Parkii Butter." },
+  { id: "el-ayak-bakim-kremi", name: "El-Ayak Bakım Kremi", category: "Kremler", price: 220, size: "50 gr", image: "/images/el_ayak_bakimi_1782141184076.png", shortDesc: "Yıpranmış eller ve sertleşmiş topuklar için yoğun bariyer.", description: "Sürekli suya maruz kalan eller ve yük taşıyan ayaklar için NURVERA özel kremi.", usage: "Özellikle gece yatmadan önce kalın bir tabaka halinde sürüp pamuklu çorap/eldiven giymeniz tavsiye edilir.", ingredients: "Prunus Amygdalus Dulcis Oil, Cera Alba, Glycerin (Bitkisel)." }
+];

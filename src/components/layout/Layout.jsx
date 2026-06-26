@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import CartDrawer from '@/components/ui/CartDrawer';
+import CartDrawer from '@/components/cart/CartDrawer';
 import Logo from '@/components/ui/Logo';
 
 export default function Layout({ children }) {

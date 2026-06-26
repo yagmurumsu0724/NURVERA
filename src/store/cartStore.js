@@ -53,14 +53,14 @@ const useCartStore = create(
       
       clearCart: () => set({ items: [] }),
       
-      // Helper function to calculate total price (assuming price is formatted as '290,00 ₺')
+      // Helper function to calculate total price
       getTotalPrice: () => {
         return get().items.reduce((total, item) => {
-          // Parse price string to number: '290,00 ₺' -> 290.00
-          const priceMatch = item.product.price.match(/\d+(,\d+)?/);
-          if (!priceMatch) return total;
-          
-          const priceValue = parseFloat(priceMatch[0].replace(',', '.'));
+          // In the new products.js, price is directly a Number (e.g., 250)
+          const priceValue = typeof item.product.price === 'number' 
+            ? item.product.price 
+            : parseFloat(item.product.price);
+            
           return total + (priceValue * item.quantity);
         }, 0);
       },

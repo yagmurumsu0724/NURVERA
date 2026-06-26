@@ -74,11 +74,11 @@ export default function HacamatPage() {
         {/* Fotoğraf (Bulanık Arka Plan) */}
         <div className="absolute inset-0 z-0">
           <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30 blur-[8px] scale-105"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50 blur-[3px] scale-105"
             style={{ backgroundImage: "url('/images/ilk_hacamat_1782115144655.png')" }}
           ></div>
           {/* Karartma Gradyanı (Yazıların net okunabilmesi için) */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0f241a]/90 via-[#1a3c34]/70 to-[#122820]/95"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0f241a]/80 via-[#1a3c34]/50 to-[#122820]/80"></div>
         </div>
 
         {/* Dekoratif Arkaplan Işıkları */}
