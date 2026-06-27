@@ -1,0 +1,64 @@
+import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
+
+export default async function handler(req, res) {
+  // 1. Authenticate Request
+  const supabase = createServerSupabaseClient({ req, res });
+  const { data: { session } } = await supabase.auth.getSession();
+
+  if (!session) {
+    return res.status(401).json({ error: 'Yetkisiz erişim' });
+  }
+
+  // 2. Authorize Request
+  const { data: roleData } = await supabase
+    .from('user_roles')
+    .select('role, is_active')
+    .eq('user_id', session.user.id)
+    .single();
+
+  if (!roleData || !roleData.is_active || !['admin', 'editor', 'moderator'].includes(roleData.role)) {
+    return res.status(403).json({ error: 'Bu işlem için yetkiniz yok' });
+  }
+
+  if (req.method !== 'GET') {
+    res.setHeader('Allow', ['GET']);
+    return res.status(405).json({ error: `Method ${req.method} not allowed` });
+  }
+
+  try {
+    const { search, status, page = 1, limit = 10 } = req.query;
+
+    let query = supabase
+      .from('orders')
+      .select('*', { count: 'exact' });
+
+    // Apply Filters
+    if (search) {
+      query = query.or(`order_number.ilike.%${search}%,customer_name.ilike.%${search}%,customer_email.ilike.%${search}%`);
+    }
+    if (status) {
+      query = query.eq('status', status);
+    }
+
+    // Sorting
+    query = query.order('created_at', { ascending: false });
+
+    // Pagination
+    const from = (Number(page) - 1) * Number(limit);
+    const to = from + Number(limit) - 1;
+    query = query.range(from, to);
+
+    const { data, count, error } = await query;
+
+    if (error) throw error;
+
+    return res.status(200).json({
+      orders: data,
+      total: count,
+      page: Number(page),
+      totalPages: Math.ceil(count / Number(limit))
+    });
+  } catch (err) {
+    return res.status(500).json({ error: err.message || 'Siparişler listelenirken bir hata oluştu.' });
+  }
+}

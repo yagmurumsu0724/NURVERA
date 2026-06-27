@@ -5,9 +5,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ShieldCheck, Truck, CreditCard, ChevronRight, CheckCircle2 } from 'lucide-react';
 import useCartStore from '@/store/cartStore';
+import { useSupabaseClient, useSessionContext } from '@supabase/auth-helpers-react';
 
 export default function CheckoutPage() {
   const router = useRouter();
+  const supabase = useSupabaseClient();
+  const { session } = useSessionContext();
   const { items, getTotalPrice, clearCart } = useCartStore();
   const [mounted, setMounted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -23,15 +26,50 @@ export default function CheckoutPage() {
   const kargoUcreti = getTotalPrice() > 500 ? 0 : 50;
   const genelToplam = getTotalPrice() + kargoUcreti;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Temsili ödeme süreci (1.5 saniye)
-    setTimeout(() => {
+    const formData = new FormData(e.target);
+    
+    const orderData = {
+       user_id: session?.user?.id || null,
+       customer_name: formData.get('fullName'),
+       customer_email: formData.get('email'),
+       customer_phone: formData.get('phone'),
+       shipping_address: {
+         fullName: formData.get('fullName'),
+         address: formData.get('address'),
+         city: formData.get('city'),
+         district: formData.get('district'),
+       },
+       subtotal: getTotalPrice(),
+       shipping_cost: kargoUcreti,
+       total: genelToplam,
+       items: items.map(item => ({
+         product_id: item.product.id,
+         name: item.product.name,
+         price: item.product.price,
+         qty: item.quantity,
+         image: item.product.images?.[0] || item.product.image || '/placeholder-image.jpg'
+       }))
+    };
+
+    try {
+      const { error } = await supabase.from('orders').insert(orderData);
+      if (error) {
+        console.error("Order error", error);
+        alert("Sipariş oluşturulurken bir hata oluştu.");
+        setIsSubmitting(false);
+        return;
+      }
+      
       clearCart();
       router.push('/siparis-basarili');
-    }, 1500);
+    } catch (err) {
+      console.error(err);
+      setIsSubmitting(false);
+    }
   };
 
   if (!mounted || items.length === 0) return null;
@@ -63,15 +101,15 @@ export default function CheckoutPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-nurvera-text/70 mb-2">Ad Soyad</label>
-                      <input required type="text" className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-nurvera-olive transition-colors bg-gray-50/50" placeholder="Adınız Soyadınız" />
+                      <input required name="fullName" type="text" className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-nurvera-olive transition-colors bg-gray-50/50" placeholder="Adınız Soyadınız" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-nurvera-text/70 mb-2">Telefon</label>
-                      <input required type="tel" className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-nurvera-olive transition-colors bg-gray-50/50" placeholder="0 (5XX) XXX XX XX" />
+                      <input required name="phone" type="tel" className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-nurvera-olive transition-colors bg-gray-50/50" placeholder="0 (5XX) XXX XX XX" />
                     </div>
                     <div className="md:col-span-2">
                       <label className="block text-sm font-medium text-nurvera-text/70 mb-2">E-posta</label>
-                      <input required type="email" className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-nurvera-olive transition-colors bg-gray-50/50" placeholder="E-posta adresiniz" />
+                      <input required name="email" type="email" className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-nurvera-olive transition-colors bg-gray-50/50" placeholder="E-posta adresiniz" />
                     </div>
                   </div>
                 </div>
@@ -84,15 +122,15 @@ export default function CheckoutPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="md:col-span-2">
                       <label className="block text-sm font-medium text-nurvera-text/70 mb-2">Açık Adres</label>
-                      <textarea required rows="3" className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-nurvera-olive transition-colors bg-gray-50/50" placeholder="Mahalle, sokak, bina, daire no..."></textarea>
+                      <textarea required name="address" rows="3" className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-nurvera-olive transition-colors bg-gray-50/50" placeholder="Mahalle, sokak, bina, daire no..."></textarea>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-nurvera-text/70 mb-2">İl</label>
-                      <input required type="text" className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-nurvera-olive transition-colors bg-gray-50/50" placeholder="İl" />
+                      <input required name="city" type="text" className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-nurvera-olive transition-colors bg-gray-50/50" placeholder="İl" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-nurvera-text/70 mb-2">İlçe</label>
-                      <input required type="text" className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-nurvera-olive transition-colors bg-gray-50/50" placeholder="İlçe" />
+                      <input required name="district" type="text" className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-nurvera-olive transition-colors bg-gray-50/50" placeholder="İlçe" />
                     </div>
                   </div>
                 </div>
@@ -138,10 +176,12 @@ export default function CheckoutPage() {
                 <h2 className="text-xl font-serif text-nurvera-text mb-6">Sipariş Özeti</h2>
                 
                 <div className="space-y-4 mb-6 max-h-60 overflow-y-auto pr-2">
-                  {items.map((item) => (
+                  {items.map((item) => {
+                    const productImage = item.product.images?.[0] || item.product.image || '/placeholder-image.jpg';
+                    return (
                     <div key={item.product.id} className="flex gap-4">
                       <div className="relative w-16 h-16 rounded-md overflow-hidden bg-nurvera-bg flex-shrink-0">
-                        <Image src={item.product.image} alt={item.product.name} fill className="object-cover" />
+                        <Image src={productImage} alt={item.product.name} fill className="object-cover" />
                       </div>
                       <div className="flex-1 flex flex-col justify-center">
                         <h4 className="text-sm font-medium text-nurvera-text">{item.product.name}</h4>
@@ -151,7 +191,8 @@ export default function CheckoutPage() {
                         </div>
                       </div>
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 <div className="border-t border-gray-100 pt-4 space-y-3 mb-6">

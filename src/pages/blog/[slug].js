@@ -4,7 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
-import { blogPosts, getPostBySlug } from '@/data/blog';
+import { createClient } from '@supabase/supabase-js';
+import { format } from 'date-fns';
+import { tr } from 'date-fns/locale';
 
 export default function BlogPost({ post }) {
   if (!post) return <div>Yazı bulunamadı.</div>;
@@ -31,15 +33,15 @@ export default function BlogPost({ post }) {
             className="text-center"
           >
             <div className="inline-block bg-nurvera-olive/10 text-nurvera-olive text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-6">
-              {post.category}
+              {post.blog_categories?.name || 'Genel'}
             </div>
             <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal text-nurvera-text leading-tight mb-8">
               {post.title}
             </h1>
             <div className="flex items-center justify-center text-xs font-bold tracking-widest text-gray-400 uppercase space-x-3 mb-12">
-              <span>{post.date}</span>
+              <span>{post.created_at ? format(new Date(post.created_at), 'd MMMM yyyy', { locale: tr }) : ''}</span>
               <span className="text-nurvera-beige">•</span>
-              <span>{post.readTime}</span>
+              <span>{post.reading_time || 5} dk okuma</span>
             </div>
           </motion.div>
 
@@ -50,7 +52,7 @@ export default function BlogPost({ post }) {
             className="relative h-[400px] md:h-[500px] w-full rounded-3xl overflow-hidden shadow-elegant border border-gray-100"
           >
             <Image 
-              src={post.image} 
+              src={post.cover_image || '/images/placeholder.jpg'} 
               alt={post.title} 
               fill
               priority
@@ -81,14 +83,36 @@ export default function BlogPost({ post }) {
 }
 
 export async function getStaticPaths() {
-  const paths = blogPosts.map((post) => ({
-    params: { slug: post.slug },
-  }));
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-  return { paths, fallback: false };
+  const { data: posts } = await supabase
+    .from('blog_posts')
+    .select('slug')
+    .eq('status', 'published');
+
+  const paths = posts?.map((post) => ({
+    params: { slug: post.slug },
+  })) || [];
+
+  return { paths, fallback: 'blocking' };
 }
 
 export async function getStaticProps({ params }) {
-  const post = getPostBySlug(params.slug);
-  return { props: { post } };
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+  const { data: post } = await supabase
+    .from('blog_posts')
+    .select('*, blog_categories(name)')
+    .eq('slug', params.slug)
+    .single();
+
+  if (!post) {
+    return { notFound: true };
+  }
+
+  return { props: { post }, revalidate: 60 };
 }

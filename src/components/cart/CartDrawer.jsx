@@ -68,11 +68,13 @@ export default function CartDrawer() {
                 </div>
               ) : (
                 <ul className="space-y-6">
-                  {items.map((item) => (
+                  {items.map((item) => {
+                    const productImage = item.product.images?.[0] || item.product.image || '/placeholder-image.jpg';
+                    return (
                     <li key={item.product.id} className="flex gap-4 items-center">
                       <div className="relative w-20 h-24 rounded-lg overflow-hidden bg-nurvera-bg flex-shrink-0">
                         <Image 
-                          src={item.product.image} 
+                          src={productImage} 
                           alt={item.product.name} 
                           fill 
                           className="object-cover"
@@ -82,7 +84,7 @@ export default function CartDrawer() {
                         <div className="flex justify-between items-start mb-2">
                           <div>
                             <h3 className="font-serif text-nurvera-text">{item.product.name}</h3>
-                            <p className="text-xs text-nurvera-text/50">{item.product.size}</p>
+                            {item.product.size && <p className="text-xs text-nurvera-text/50">{item.product.size}</p>}
                           </div>
                           <button 
                             onClick={() => removeItem(item.product.id)}
@@ -113,7 +115,8 @@ export default function CartDrawer() {
                         </div>
                       </div>
                     </li>
-                  ))}
+                    );
+                  })}
                 </ul>
               )}
             </div>

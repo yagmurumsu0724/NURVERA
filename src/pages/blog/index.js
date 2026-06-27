@@ -3,16 +3,38 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { blogPosts } from '@/data/blog';
+import { createClient } from '@supabase/supabase-js';
+import { format } from 'date-fns';
+import { tr } from 'date-fns/locale';
 
-export default function BlogIndex() {
+export async function getStaticProps() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+  const { data: blogPosts } = await supabase
+    .from('blog_posts')
+    .select('id, title, slug, excerpt, cover_image, reading_time, created_at, blog_categories(name)')
+    .eq('status', 'published')
+    .order('created_at', { ascending: false });
+
+  return {
+    props: {
+      blogPosts: blogPosts || []
+    },
+    revalidate: 60
+  };
+}
+
+export default function BlogIndex({ blogPosts }) {
   const [activeCategory, setActiveCategory] = useState('Tümü');
 
-  const categories = ['Tümü', 'Geleneksel Uygulamalar', 'Hidrosol Rehberi', 'Doğal Yaşam', 'Cilt Bakımı', 'İçerik Analizi'];
+  const dynamicCategories = ['Tümü', ...new Set(blogPosts.map(p => p.blog_categories?.name).filter(Boolean))];
+  const categories = dynamicCategories.length > 1 ? dynamicCategories : ['Tümü', 'Geleneksel Uygulamalar', 'Hidrosol Rehberi', 'Doğal Yaşam', 'Cilt Bakımı', 'İçerik Analizi'];
 
   const filteredPosts = activeCategory === 'Tümü' 
     ? blogPosts 
-    : blogPosts.filter(post => post.category === activeCategory);
+    : blogPosts.filter(post => post.blog_categories?.name === activeCategory);
 
   return (
     <>
@@ -73,10 +95,10 @@ export default function BlogIndex() {
                 >
                   <Link href={`/blog/${post.slug}`} className="block relative h-64 overflow-hidden">
                     <div className="absolute top-6 left-6 z-10 bg-white/90 backdrop-blur-md text-nurvera-olive text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
-                      {post.category}
+                      {post.blog_categories?.name || 'Genel'}
                     </div>
                     <Image 
-                      src={post.image} 
+                      src={post.cover_image || '/images/placeholder.jpg'} 
                       alt={post.title} 
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-1000"
@@ -84,9 +106,9 @@ export default function BlogIndex() {
                   </Link>
                   <div className="p-8 flex flex-col flex-grow">
                     <div className="flex items-center text-xs font-bold tracking-widest text-gray-400 uppercase mb-4 space-x-3">
-                      <span>{post.date}</span>
+                      <span>{post.created_at ? format(new Date(post.created_at), 'd MMMM yyyy', { locale: tr }) : ''}</span>
                       <span className="text-nurvera-beige">•</span>
-                      <span>{post.readTime}</span>
+                      <span>{post.reading_time || 5} dk okuma</span>
                     </div>
                     <Link href={`/blog/${post.slug}`} className="block">
                       <h2 className="font-serif text-2xl font-medium text-nurvera-text mb-4 group-hover:text-nurvera-olive transition-colors leading-snug">

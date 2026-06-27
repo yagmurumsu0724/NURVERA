@@ -47,3 +47,159 @@ body {
 .animate-fade-out-late {
   animation: fadeOutLate 1.2s ease-in-out forwards;
 }
+
+/* ============================================
+   NURVERA Admin Panel Light Theme Styling
+   ============================================ */
+.admin-panel {
+  --color-slate-950: #F8F7F3 !important; /* Main content bg */
+  --color-slate-900: #FFFFFF !important; /* Card bg */
+  --color-slate-850: #F8F7F3 !important; /* Sub card bg */
+  --color-slate-800: #F2EEE5 !important; /* Border color */
+  --color-slate-700: #E5E7EB !important; /* Light border / divider */
+  
+  --color-slate-650: #64748B !important;
+  --color-slate-600: #64748B !important; /* Muted text */
+  --color-slate-500: #64748B !important; /* Secondary text */
+  --color-slate-400: #475569 !important; /* Muted labels */
+  --color-slate-300: #2C2C2C !important; /* Body text */
+  --color-slate-200: #1E293B !important; /* Subheading */
+  --color-slate-100: #0F172A !important; /* Headings */
+  
+  color: #2C2C2C !important;
+}
+
+/* Scoped overrides to convert explicit text-white to brand text color */
+.admin-panel h1.text-white,
+.admin-panel h2.text-white,
+.admin-panel h3.text-white,
+.admin-panel h4.text-white,
+.admin-panel span.text-white,
+.admin-panel p.text-white,
+.admin-panel th.text-white,
+.admin-panel td.text-white {
+  color: #2C2C2C !important;
+}
+
+/* Force body text and heading colors inside admin panel to dark */
+.admin-panel .text-white {
+  color: #2C2C2C !important;
+}
+
+/* Allow white text for active states/badges/buttons explicitly */
+.admin-panel button.text-white,
+.admin-panel a.text-white,
+.admin-panel button .text-white,
+.admin-panel a .text-white,
+.admin-panel .bg-emerald-500 .text-white,
+.admin-panel .bg-red-500 .text-white,
+.admin-panel .bg-blue-500 .text-white,
+.admin-panel .bg-indigo-500 .text-white,
+.admin-panel .bg-purple-500 .text-white,
+.admin-panel .bg-slate-900 .text-white,
+.admin-panel .bg-slate-800 .text-white,
+.admin-panel .bg-slate-950 .text-white,
+.admin-panel .bg-emerald-500\/10 .text-emerald-400,
+.admin-panel .bg-red-500\/10 .text-red-400,
+.admin-panel .bg-blue-500\/10 .text-blue-400,
+.admin-panel .bg-indigo-500\/10 .text-indigo-400,
+.admin-panel .bg-purple-500\/10 .text-purple-400,
+.admin-panel .bg-slate-500\/10 .text-slate-400,
+.admin-panel .bg-amber-500\/10 .text-amber-400,
+.admin-panel .bg-emerald-500\/10 .text-emerald-500,
+.admin-panel .bg-red-500\/10 .text-red-500,
+.admin-panel .bg-blue-500\/10 .text-blue-500,
+.admin-panel .bg-amber-500\/10 .text-amber-500,
+.admin-panel .bg-slate-800\/40 .text-slate-300,
+.admin-panel .bg-slate-800\/40 .text-white,
+.admin-panel .bg-\[\#1E4D3A\] .text-\[\#7FA34D\],
+.admin-panel .bg-\[\#1E4D3A\]\/20 .text-\[\#7FA34D\],
+.admin-panel .bg-slate-800 .text-slate-400,
+.admin-panel .bg-slate-800 .text-\[\#7FA34D\],
+.admin-panel .bg-\[\#7FA34D\] .text-slate-950,
+.admin-panel .bg-\[\#7FA34D\] .text-white,
+.admin-panel .bg-\[\#7FA34D\] svg,
+.admin-panel .bg-\[\#7FA34D\] span {
+  color: inherit !important;
+}
+
+/* Ensure background of layout is correct */
+.admin-panel main {
+  background-color: #F8F7F3 !important;
+}
+
+/* Sidebar Specific Styling (Dark Forest theme to match brand footer) */
+.admin-sidebar {
+  background-color: #2D3E2E !important;
+  border-right: 1px solid rgba(85, 107, 47, 0.15) !important;
+}
+
+.admin-sidebar * {
+  color: #E2E8F0 !important;
+}
+
+.admin-sidebar span.text-slate-900,
+.admin-sidebar .bg-\[\#7FA34D\] span,
+.admin-sidebar .bg-\[\#7FA34D\] {
+  color: #2D3E2E !important;
+}
+
+.admin-sidebar .text-\[\#7FA34D\] {
+  color: #9BAE8A !important;
+}
+
+.admin-sidebar .bg-\[\#1E4D3A\] {
+  background-color: #556B2F !important;
+}
+
+.admin-sidebar button.bg-slate-800,
+.admin-sidebar a.bg-slate-800 {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.admin-sidebar button.bg-slate-800:hover,
+.admin-sidebar a.bg-slate-800:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Form inputs & buttons styling */
+.admin-panel input,
+.admin-panel select,
+.admin-panel textarea {
+  background-color: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  color: #2C2C2C !important;
+}
+
+.admin-panel input:focus,
+.admin-panel select:focus,
+.admin-panel textarea:focus {
+  border-color: #556B2F !important;
+  box-shadow: 0 0 0 2px rgba(85, 107, 47, 0.15) !important;
+}
+
+/* Primary Button Styling (Nurvera Olive Theme) */
+.admin-panel button[type="submit"],
+.admin-panel .bg-\[\#7FA34D\] {
+  background-color: #556B2F !important;
+  color: #FFFFFF !important;
+}
+
+.admin-panel button[type="submit"]:hover,
+.admin-panel .bg-\[\#7FA34D\]:hover {
+  background-color: #3E5A38 !important;
+}
+
+.admin-panel button[type="submit"] *,
+.admin-panel .bg-\[\#7FA34D\] * {
+  color: #FFFFFF !important;
+}
+
+/* Recharts Tooltip styling override */
+.recharts-default-tooltip {
+  background-color: #FFFFFF !important;
+  border: 1px solid #F2EEE5 !important;
+  border-radius: 8px !important;
+  color: #2C2C2C !important;
+}
+

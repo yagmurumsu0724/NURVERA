@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import Logo from '@/components/ui/Logo';
 import { ShoppingBag, Phone, Menu, X, User, ChevronDown, ShieldCheck } from 'lucide-react';
 import useCartStore from '@/store/cartStore';
+import { useSupabaseClient, useSessionContext } from '@supabase/auth-helpers-react';
+import { useSession } from 'next-auth/react';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -13,6 +15,11 @@ export default function Header() {
   const [mounted, setMounted] = useState(false);
   const { getTotalItems, toggleCart } = useCartStore();
   const router = useRouter();
+  
+  // Auth hooks
+  const { session: supabaseSession } = useSessionContext();
+  const { data: nextAuthSession } = useSession();
+  const isAuthenticated = !!supabaseSession || !!nextAuthSession;
 
   const isHomePage = router.pathname === '/';
 
@@ -126,7 +133,7 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center space-x-6">
-          <Link href="/login" className={`transition-all duration-300 hover:-translate-y-0.5 hidden sm:block ${iconColor}`}>
+          <Link href={isAuthenticated ? "/hesabim" : "/login"} className={`transition-all duration-300 hover:-translate-y-0.5 hidden sm:block ${iconColor}`}>
             <User size={22} strokeWidth={1.5} />
           </Link>
           <a href="tel:+905354325337" className={`transition-all duration-300 hover:-translate-y-0.5 hidden sm:block ${iconColor}`}>

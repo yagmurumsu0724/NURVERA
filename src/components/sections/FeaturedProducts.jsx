@@ -4,9 +4,9 @@ import Image from 'next/image';
 import { ShoppingCart } from 'lucide-react';
 import useCartStore from '@/store/cartStore';
 import { motion } from 'framer-motion';
-import { products } from '@/data/products';
+import FavoriteButton from '@/components/ui/FavoriteButton';
 
-export default function FeaturedProducts({ showLink = true }) {
+export default function FeaturedProducts({ products = [], showLink = true }) {
   const { addItem, toggleCart } = useCartStore();
 
   const handleAddToCart = (product, e) => {
@@ -43,33 +43,41 @@ export default function FeaturedProducts({ showLink = true }) {
               className="group bg-white overflow-hidden hover:shadow-elegant transition-all duration-700 border border-gray-100 flex flex-col"
             >
               {/* Görsel Alanı */}
-              <Link href={`/urunler/${product.id}`} className="block relative h-[360px] overflow-hidden bg-[#f9f8f6] cursor-pointer">
-                {product.badge && (
+              <div className="block relative h-[360px] overflow-hidden bg-[#f9f8f6] cursor-pointer">
+                {product.is_new && (
                   <div className="absolute top-6 left-6 z-10 bg-nurvera-olive text-white text-[10px] font-bold px-4 py-1.5 uppercase tracking-widest">
-                    {product.badge}
+                    YENİ
                   </div>
                 )}
-                <Image 
-                  src={product.image} 
-                  alt={product.name} 
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-1000 group-hover:scale-[1.03]"
-                />
-              </Link>
+                
+                <Link href={`/urunler/${product.slug}`}>
+                  <Image 
+                    src={product.images && product.images.length > 0 ? product.images[0] : '/images/placeholder.jpg'} 
+                    alt={product.name} 
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-1000 group-hover:scale-[1.03]"
+                  />
+                </Link>
+
+                {/* Favorite Button */}
+                <div className="absolute top-6 right-6 z-10">
+                  <FavoriteButton productId={product.id} />
+                </div>
+              </div>
 
               {/* İçerik Alanı */}
               <div className="p-8 flex flex-col flex-grow bg-white">
                 <div className="flex-grow">
-                  <Link href={`/urunler/${product.id}`}>
+                  <Link href={`/urunler/${product.slug}`}>
                     <h3 className="font-serif text-2xl font-normal text-nurvera-text mb-2 hover:text-nurvera-olive transition-colors cursor-pointer">{product.name}</h3>
                   </Link>
                   <div className="text-nurvera-accent/80 text-[11px] font-bold tracking-[0.15em] uppercase mb-4">
-                    {product.description}
+                    {product.short_description || product.description?.substring(0, 60)}
                   </div>
                   <div className="flex justify-between items-end mt-6">
-                    <span className="text-xl font-medium text-nurvera-olive">{product.price}</span>
-                    <span className="text-sm text-gray-400">{product.volume}</span>
+                    <span className="text-xl font-medium text-nurvera-olive">{product.price} TL</span>
+                    <span className="text-sm text-gray-400">{product.schema_data?.size || ''}</span>
                   </div>
                 </div>
                 
